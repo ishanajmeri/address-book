@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Button } from 'antd';
+import { Card, Row, Col, Button, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
-  state = {};
+  state = {
+    visible: false,
+  };
   handleClick = () => {
     console.log('sign up');
   };
+
+  handleLogin = () => {
+    const { visible } = this.state;
+    this.setState({ visible: !visible });
+  };
   render() {
+    const onFinish = (values) => {
+      console.log('Success:', values);
+    };
+
+    const onFinishFailed = (errorInfo) => {
+      console.log('Failed:', errorInfo);
+    };
     return (
-      <div>
+      <>
         <Card
           style={{
             backgroundImage: 'url(https://i.picsum.photos/id/1/5616/3744.jpg)',
@@ -21,9 +35,9 @@ class Home extends Component {
               <h4 style={{ color: 'white' }}>Welcome to Edunomics</h4>
             </Col>
             <Col span={4}>
-              <Link style={{ color: 'white', padding: '5%' }} to="">
-                Log in
-              </Link>
+              <Button type="link" ghost="true" onClick={this.handleLogin}>
+                Log In
+              </Button>
               <Button shape="round" ghost="true" href="/signup">
                 Sign Up
               </Button>
@@ -49,6 +63,45 @@ class Home extends Component {
                 </h2>
               </Row>
             </Col>
+            {this.state.visible && (
+              <Col style={{ paddingTop: '2%' }}>
+                <Form
+                  layout="vertical"
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
+                >
+                  <Form.Item
+                    label="Email Id"
+                    name="email"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please input your username!',
+                      },
+                    ]}
+                  >
+                    <Input type="email"></Input>
+                  </Form.Item>
+                  <Form.Item
+                    label="password"
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please input your password!',
+                      },
+                    ]}
+                  >
+                    <Input type="password"></Input>
+                  </Form.Item>
+                  <Form.Item>
+                    <Button ghost="true" shape="round">
+                      log in
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </Col>
+            )}
           </Row>
         </Card>
         <Card style={{ padding: '5% 10% 0 15%' }}>
@@ -137,7 +190,7 @@ class Home extends Component {
             take very seriously."
           </p>
         </Card>
-      </div>
+      </>
     );
   }
 }

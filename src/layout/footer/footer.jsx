@@ -25,15 +25,25 @@ const Footer = () => {
       </Row>
       <br />
       <Row justify="center">
-        <Link style={{ color: 'white', fontSize: '16px' }}>JOIN US</Link>
+        <Link style={{ color: 'white', fontSize: '16px' }} to="">
+          JOIN US
+        </Link>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <Link style={{ color: 'white', fontSize: '16px' }}>COOKIE POLICY</Link>
+        <Link style={{ color: 'white', fontSize: '16px' }} to="">
+          COOKIE POLICY
+        </Link>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <Link style={{ color: 'white', fontSize: '16px' }}>TERMS OF USE</Link>
+        <Link style={{ color: 'white', fontSize: '16px' }} to="">
+          TERMS OF USE
+        </Link>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <Link style={{ color: 'white', fontSize: '16px' }}>TECH</Link>
+        <Link style={{ color: 'white', fontSize: '16px' }} to="">
+          TECH
+        </Link>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <Link style={{ color: 'white', fontSize: '16px' }}>PRIVACY POLICY</Link>
+        <Link style={{ color: 'white', fontSize: '16px' }} to="">
+          PRIVACY POLICY
+        </Link>
       </Row>
     </Card>
   );
