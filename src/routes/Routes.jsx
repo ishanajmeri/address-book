@@ -4,22 +4,29 @@ import RouteWithLayout from './routeWithLayouts';
 import MainLayout from '../layout/layout';
 import Home from '../views/home/home';
 import SignUp from '../views/signup/signup';
+import Welcome from '../views/welcome/welcome';
 
 const Routes = () => {
   return (
     <Switch>
-      <Redirect exact from="/" to="/home" />
+      <Redirect exact from="/" to="/welcome" />
       <RouteWithLayout
-        component={Home}
+        component={Welcome}
         exact
         layout={MainLayout}
-        path="/home"
+        path="/welcome"
       />
       <RouteWithLayout
         component={SignUp}
         exact
         layout={MainLayout}
         path="/signup"
+      />
+      <RouteWithLayout
+        component={Home}
+        exact
+        layout={MainLayout}
+        path="/home"
       />
     </Switch>
   );
