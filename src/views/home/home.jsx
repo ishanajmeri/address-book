@@ -1,7 +1,55 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Button, Menu, Avatar } from 'antd';
-import { Link } from 'react-router-dom';
+import { Card, Row, Col, Button, Menu, Dropdown } from 'antd';
 import Submenu from './components/submenu';
+
+function handleMenuClick(e) {
+  console.log('click', e);
+}
+
+const menu = (
+  <Menu onClick={handleMenuClick}>
+    <Menu.SubMenu title="11th">
+      <Menu.SubMenu title="physics">
+        <Menu.Item key="1"> Physical World</Menu.Item>
+        <Menu.Item key="2"> Units and Measurement</Menu.Item>
+        <Menu.Item key="3"> Motion in a Straight Line</Menu.Item>
+        <Menu.Item key="4"> Motion in a Plane</Menu.Item>
+        <Menu.Item key="5"> Law of Motion</Menu.Item>
+        <Menu.Item key="6"> Work, Energy, and Power</Menu.Item>
+        <Menu.Item key="7"> Systems of Power and Rotational Motion</Menu.Item>
+        <Menu.Item key="8"> Gravitation</Menu.Item>
+      </Menu.SubMenu>
+      <Menu.SubMenu title="maths">
+        <Menu.Item key="1">sets</Menu.Item>
+        <Menu.Item key="2">Relation and function</Menu.Item>
+        <Menu.Item key="3">Trignometric and function</Menu.Item>
+        <Menu.Item key="4">Principal fo maths</Menu.Item>
+        <Menu.Item key="5">Complex no. and QE</Menu.Item>
+        <Menu.Item key="6">Liner inequalities</Menu.Item>
+      </Menu.SubMenu>
+    </Menu.SubMenu>
+    <Menu.SubMenu title="12th">
+      <Menu.SubMenu title="physics">
+        <Menu.Item key="1"> Physical World</Menu.Item>
+        <Menu.Item key="2"> Units and Measurement</Menu.Item>
+        <Menu.Item key="3"> Motion in a Straight Line</Menu.Item>
+        <Menu.Item key="4"> Motion in a Plane</Menu.Item>
+        <Menu.Item key="5"> Law of Motion</Menu.Item>
+        <Menu.Item key="6"> Work, Energy, and Power</Menu.Item>
+        <Menu.Item key="7"> Systems of Power and Rotational Motion</Menu.Item>
+        <Menu.Item key="8"> Gravitation</Menu.Item>
+      </Menu.SubMenu>
+      <Menu.SubMenu title="maths">
+        <Menu.Item key="1">sets</Menu.Item>
+        <Menu.Item key="2">Relation and function</Menu.Item>
+        <Menu.Item key="3">Trignometric and function</Menu.Item>
+        <Menu.Item key="4">Principal fo maths</Menu.Item>
+        <Menu.Item key="5">Complex no. and QE</Menu.Item>
+        <Menu.Item key="6">Liner inequalities</Menu.Item>
+      </Menu.SubMenu>
+    </Menu.SubMenu>
+  </Menu>
+);
 class Home extends Component {
   state = {
     current: 'Welcome to Edunomics',
@@ -17,7 +65,19 @@ class Home extends Component {
       <>
         <Row>
           <Col span={20} style={{ padding: '5px' }}>
-            <h3 style={{ padding: '5px' }}>{this.state.current}</h3>
+            <Row>
+              <h3 style={{ padding: '5px' }}>{this.state.current}</h3>
+              {this.state.current === 'Sessions' && (
+                <Dropdown overlay={menu}>
+                  <Button
+                    shape="round"
+                    style={{ marginLeft: '25%', marginTop: '5px' }}
+                  >
+                    Select class
+                  </Button>
+                </Dropdown>
+              )}
+            </Row>
           </Col>
           <Col span={4} style={{ padding: '5px' }}>
             <Button shape="round" style={{ marginTop: '5px' }}>

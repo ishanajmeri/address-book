@@ -66,8 +66,39 @@ const homesub = (
   </>
 );
 
+const sessionsub = (
+  <>
+    <Card style={{ backgroundColor: 'blue', height: '300px' }}></Card>
+  </>
+);
+
+const downloadsub = (
+  <>
+    <Card style={{ backgroundColor: 'blue', height: '300px' }}>
+      <h3 style={{ color: 'white', fontWeight: 'bold' }}>
+        Download previous year question papers
+      </h3>
+    </Card>
+  </>
+);
+
+const settingsub = (
+  <>
+    <Card style={{ backgroundColor: 'blue', height: '300px' }}></Card>
+  </>
+);
+const aboutsub = (
+  <>
+    <Card style={{ backgroundColor: 'blue', height: '300px' }}></Card>
+  </>
+);
+
 const Submenu = (props) => {
   if (props.current === 'Welcome to Edunomics') return homesub;
+  if (props.current === 'Sessions') return sessionsub;
+  if (props.current === 'Downloads') return downloadsub;
+  if (props.current === 'Settings') return settingsub;
+  if (props.current === 'About') return aboutsub;
 };
 
 export default Submenu;
