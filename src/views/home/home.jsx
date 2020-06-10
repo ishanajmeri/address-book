@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Button, Menu, Drawer, Avatar } from 'antd';
+import { Card, Row, Col, Button, Menu, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
+import Submenu from './components/submenu';
 class Home extends Component {
   state = {
-    current: 'home',
+    current: 'Welcome to Edunomics',
   };
   handleClick = (e) => {
     console.log('click ', e);
@@ -13,109 +14,52 @@ class Home extends Component {
   };
   render() {
     return (
-      <Card>
+      <>
         <Row>
-          <Col span={20}>
-            <h3>welcome to Edunomics</h3>
+          <Col span={20} style={{ padding: '5px' }}>
+            <h3 style={{ padding: '5px' }}>{this.state.current}</h3>
           </Col>
-          <Col span={4}>
-            <Button shape="round">My Account</Button>
+          <Col span={4} style={{ padding: '5px' }}>
+            <Button shape="round" style={{ marginTop: '5px' }}>
+              My Account
+            </Button>
           </Col>
         </Row>
         <Row>
-          <Col span={5}>
-            <div
-              style={{
-                position: 'relative',
-                overflow: 'hidden',
-                height: '100%',
-                padding: '50%',
-              }}
+          <Col span={5} style={{ backgroundColor: 'grey' }}>
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+              mode="vertical"
+              style={{ backgroundColor: 'grey', height: '100%' }}
             >
-              <Drawer
-                placement="left"
-                visible={true}
-                closable={false}
-                style={{ position: 'absolute' }}
-                getContainer={false}
-              >
-                <Menu
-                  onClick={this.handleClick}
-                  selectedKeys={[this.state.current]}
-                  mode="vertical"
-                >
-                  <Menu.Item key="home">Home</Menu.Item>
-                  <Menu.Item key="sessions">Sessions</Menu.Item>
-                  <Menu.Item key="downloads">Downloads</Menu.Item>
-                  <Menu.Item key="settings">Settings</Menu.Item>
-                  <Menu.Item key="about">About</Menu.Item>
-                </Menu>
-              </Drawer>
-            </div>
+              <Menu.Item key="Welcome to Edunomics">Home</Menu.Item>
+              <Menu.Item key="Sessions">Sessions</Menu.Item>
+              <Menu.Item key="Downloads">Downloads</Menu.Item>
+              <Menu.Item key="Settings">Settings</Menu.Item>
+              <Menu.Item key="About">About</Menu.Item>
+            </Menu>
           </Col>
           <Col span={19}>
-            <Row justify="center">
-              <Card style={{ marginRight: '4%' }}>
-                <Card.Meta
-                  avatar={
-                    <Link to="">
-                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                    </Link>
-                  }
-                  title={
-                    <>
-                      <p>All interactive</p>
-                      <p>Sessions</p>
-                    </>
-                  }
-                />
+            <div style={{ backgroundColor: 'blue' }}>
+              <Submenu current={this.state.current} />
+            </div>
+            <Row justify="center" style={{ marginTop: '4%' }}>
+              <Card title="Topics Covered" style={{ marginRight: '4%' }}>
+                <div style={{ width: '250px', height: '50px' }}></div>
               </Card>
-              <Card>
-                <Card.Meta
-                  avatar={
-                    <Link to="">
-                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                    </Link>
-                  }
-                  title={
-                    <>
-                      <p>Practice</p>
-                      <p> Questions</p>
-                    </>
-                  }
-                />
+              <Card title="Recent Activities">
+                <div style={{ width: '250px', height: '50px' }}></div>
               </Card>
             </Row>
             <Row justify="center" style={{ marginTop: '4%' }}>
-              <Card style={{ marginRight: '4%' }}>
-                <Card.Meta
-                  avatar={
-                    <Link to="">
-                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                    </Link>
-                  }
-                  title={<p>Downloads</p>}
-                />
-              </Card>
-              <Card>
-                <Card.Meta
-                  avatar={
-                    <Link to="">
-                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                    </Link>
-                  }
-                  title={
-                    <>
-                      <p>Ask</p>
-                      <p> Questions</p>
-                    </>
-                  }
-                />
+              <Card title="performance">
+                <div style={{ height: '40px', width: '500px' }}></div>
               </Card>
             </Row>
           </Col>
         </Row>
-      </Card>
+      </>
     );
   }
 }
