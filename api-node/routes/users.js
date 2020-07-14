@@ -17,4 +17,12 @@ router.post('/', async (req, res) => {
   res.send(user);
 });
 
+router.get('/:id', async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user)
+    return res.status(404).send('The name with the given ID was not found');
+
+  res.send(user);
+});
+
 module.exports = router;

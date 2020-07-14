@@ -10,6 +10,10 @@ export function register(user) {
   });
 }
 
-export function getUser() {
+export function getUsers() {
   return http.get(apiEndpoint);
+}
+
+export function getUser(userId) {
+  return http.get(`${apiEndpoint}/${userId}`);
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Row, Table, Space, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import { getUser } from '../../services/userServices';
+import { getUsers } from '../../services/userServices';
 
 class Home extends Component {
   state = {
@@ -14,8 +14,17 @@ class Home extends Component {
     users: [],
   };
   async componentDidMount() {
-    const { data } = await getUser();
-    this.setState({ users: data });
+    const { data } = await getUsers();
+    let users = [];
+    let user = [];
+    for (let item of data) {
+      user.key = item._id;
+      user.name = item.name;
+      user.number = item.number;
+      users.push(user);
+      user = [];
+    }
+    this.setState({ users });
   }
 
   handleChange = (pagination, filters, sorter) => {
@@ -55,7 +64,7 @@ class Home extends Component {
         key: 'action',
         render: (text, record) => (
           <Space size="middle">
-            <Link to="/edit">Edit {record.name}</Link>
+            <Link to={`/edit/${record.key}`}>Edit {record.name}</Link>
             <Link to="/delete">Delete</Link>
           </Space>
         ),
