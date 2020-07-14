@@ -1,7 +1,5 @@
-import { Component } from 'react';
-// import { NavLink } from 'react-router-dom';
-// import { Row, Col, Layout } from 'antd';
-// import { AntCloudOutlined } from '@ant-design/icons';
+import React, { Component } from 'react';
+import { Row, Col, Layout } from 'antd';
 
 class Navbar extends Component {
   state = { current: true, path: this.props.path };
@@ -11,17 +9,13 @@ class Navbar extends Component {
   };
   render() {
     return (
-      // <Layout.Header style={{ backgroundColor: 'white' }}>
-      //   <Row>
-      //     <Col span={2}>
-      //       <NavLink to="/">
-      //         <AntCloudOutlined style={{ fontSize: '15px', padding: '10%' }} />
-      //         Physics
-      //       </NavLink>
-      //     </Col>
-      //   </Row>
-      // </Layout.Header>
-      null
+      <Layout.Header style={{ backgroundColor: 'white' }}>
+        <Row justify="center">
+          <Col>
+            <h2>Address Book Manager</h2>
+          </Col>
+        </Row>
+      </Layout.Header>
     );
   }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
 import Navbar from './navbar/navbar';
-import Footer from './footer/footer';
 
 const MainLayout = (props) => {
   return (
@@ -15,7 +14,6 @@ const MainLayout = (props) => {
           {/* {childern} */}
           {props.children}
         </main>
-        <Footer />
       </Layout>
     </div>
   );
