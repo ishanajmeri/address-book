@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 3,
     maxlength: 50,
   },
   number: {
@@ -16,10 +16,21 @@ const UserSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', UserSchema);
-
+var data = [
+  { name: 'roshan', number: '+919345692433' },
+  { name: 'joey', number: '+919234567933' },
+  { name: 'rose', number: '+919335672315' },
+  { name: 'chandle', number: '+919335678930' },
+  { name: 'emma', number: '+919333453267' },
+  { name: 'josh', number: '+919333451289' },
+  { name: 'rohan', number: '+919332346762' },
+];
+for (let users of data) {
+  User.insertMany(users);
+}
 function validateUser(user) {
   const Schema = {
-    name: Joi.string().min(5).max(50).required(),
+    name: Joi.string().min(3).max(50).required(),
     number: Joi.number().required(),
   };
   return Joi.validate(user, Schema);

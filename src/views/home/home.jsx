@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Row, Table, Space, Col } from 'antd';
 import { Link } from 'react-router-dom';
+import { getUser } from '../../services/userServices';
 
 class Home extends Component {
   state = {
@@ -10,10 +11,14 @@ class Home extends Component {
     },
     filteredInfo: null,
     sortedInfo: null,
+    users: [],
   };
+  async componentDidMount() {
+    const { data } = await getUser();
+    this.setState({ users: data });
+  }
 
   handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
     this.setState({
       filteredInfo: filters,
       sortedInfo: sorter,
@@ -30,7 +35,7 @@ class Home extends Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text) => <Link>{text}</Link>,
+        render: (text) => <Link to="/edit">{text}</Link>,
         filteredValue: filteredInfo.name || null,
         onFilter: (value, record) => record.name.includes(value),
         sorter: (a, b) => a.name.length - b.name.length,
@@ -56,57 +61,13 @@ class Home extends Component {
         ),
       },
     ];
-
-    const data = [
-      {
-        key: '1',
-        name: 'John Brown',
-        number: 32,
-      },
-      {
-        key: '2',
-        name: 'Jim Green',
-        number: 42,
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        number: 32,
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        number: 32,
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        number: 32,
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        number: 32,
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        number: 32,
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        number: 32,
-      },
-    ];
-
     return (
       <Card>
         <Row justify="center">
           <Col span={10}>
             <Table
               columns={columns}
-              dataSource={data}
+              dataSource={this.state.users}
               pagination={this.state.pagination}
               onChange={this.handleChange}
             />

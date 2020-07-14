@@ -3,6 +3,7 @@ const app = express();
 const users = require('./routes/users');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const User = require('./models/user');
 
 mongoose
   .connect('mongodb://localhost/addressbook', {
