@@ -17,6 +17,30 @@ router.post('/', async (req, res) => {
   res.send(user);
 });
 
+router.put('/:id', async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+      number: req.body.number,
+    },
+    { new: true }
+  );
+  if (!user)
+    return res.status(404).send('the user with the given Id was not found');
+  res.send(user);
+});
+
+router.delete('/:id', async (req, res) => {
+  const user = await User.findByIdAndRemove(req.params.id);
+  if (!user)
+    return res.status(404).send('the user with the given Id was not found');
+  res.send(user);
+});
+
 router.get('/:id', async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user)

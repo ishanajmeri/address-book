@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Card, Row, Table, Space, Col } from 'antd';
+import { Card, Row, Table, Space, Col, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import { getUsers } from '../../services/userServices';
+import { getUsers, deleteUser } from '../../services/userServices';
 
 class Home extends Component {
   state = {
@@ -12,6 +12,7 @@ class Home extends Component {
     filteredInfo: null,
     sortedInfo: null,
     users: [],
+    search: '',
   };
   async componentDidMount() {
     const { data } = await getUsers();
@@ -34,7 +35,34 @@ class Home extends Component {
       pagination,
     });
   };
+  handleClick = () => {
+    this.props.history.push('/edit/new');
+  };
 
+  handleDelete = async (user) => {
+    const originalUsers = this.state.users;
+    const users = originalUsers.filter((m) => m._id !== user._id);
+    this.setState({ users });
+    try {
+      await deleteUser(user._id);
+    } catch (ex) {
+      console.log(ex);
+      this.setState({ users: originalUsers });
+    }
+  };
+
+  handleSearch = (search) => {
+    this.setState({ search });
+  };
+  getdata = () => {
+    const { search, users: allusers } = this.state;
+    let filterd = allusers;
+    if (search)
+      filterd = allusers.filter((m) =>
+        m.name.toLowerCase().startsWith(search.toLowerCase())
+      );
+    return { users: filterd };
+  };
   render() {
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
@@ -44,7 +72,9 @@ class Home extends Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text) => <Link to="/edit">{text}</Link>,
+        render: (text, record) => (
+          <Link to={`/edit/${record.key}`}>{text}</Link>
+        ),
         filteredValue: filteredInfo.name || null,
         onFilter: (value, record) => record.name.includes(value),
         sorter: (a, b) => a.name.length - b.name.length,
@@ -64,19 +94,36 @@ class Home extends Component {
         key: 'action',
         render: (text, record) => (
           <Space size="middle">
-            <Link to={`/edit/${record.key}`}>Edit {record.name}</Link>
-            <Link to="/delete">Delete</Link>
+            <Link to={`/edit/${record.key}`}>Edit </Link>
+            <Button type="link" onClick={() => this.handleDelete(record)}>
+              Delete
+            </Button>
           </Space>
         ),
       },
     ];
+    const { users } = this.getdata();
     return (
       <Card>
         <Row justify="center">
           <Col span={10}>
+            <Button
+              onClick={this.handleClick}
+              type="primary"
+              style={{ marginBottom: 16 }}
+            >
+              Add a user
+            </Button>
+            <Row>
+              <Input.Search
+                placeholder="input search"
+                onChange={(e) => this.handleSearch(e.currentTarget.value)}
+              />
+            </Row>
+            <br />
             <Table
               columns={columns}
-              dataSource={this.state.users}
+              dataSource={users}
               pagination={this.state.pagination}
               onChange={this.handleChange}
             />

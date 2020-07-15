@@ -1,7 +1,7 @@
 import React from 'react';
 import Joi from 'joi-browser';
 import { Card, Row } from 'antd';
-import { getUser } from '../../services/userServices';
+import { getUser, saveUser } from '../../services/userServices';
 import Form from './components/form';
 
 class Edit extends Form {
@@ -15,14 +15,13 @@ class Edit extends Form {
   schema = {
     _id: Joi.string(),
     name: Joi.string().required().label('Name').min(3),
-    number: Joi.number().required().label('Number').min(10).max(10),
+    number: Joi.number().required().label('Number'),
   };
   async componentDidMount() {
     try {
       const userId = this.props.match.params.id;
       if (userId === 'new') return;
       const { data } = await getUser(userId);
-      console.log(data);
       this.setState({ data: this.mapToViewModal(data) });
     } catch (ex) {
       console.log(ex);
@@ -36,7 +35,9 @@ class Edit extends Form {
     };
   }
   doSubmit = async () => {
-    console.log('object');
+    await saveUser(this.state.data);
+
+    this.props.history.push('/');
   };
   render() {
     return (
