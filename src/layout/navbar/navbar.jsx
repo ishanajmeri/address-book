@@ -10,11 +10,11 @@ class Navbar extends Component {
   render() {
     return (
       <Layout.Header style={{ backgroundColor: 'white' }}>
-        <Row justify="center">
-          <Col>
-            <h2>Address Book Manager</h2>
-          </Col>
-        </Row>
+        <Col xs={25} sm={24} md={24} lg={24}>
+          <Row justify="center">
+            <strong>Address Book Manager</strong>
+          </Row>
+        </Col>
       </Layout.Header>
     );
   }

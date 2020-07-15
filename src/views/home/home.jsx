@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Row, Table, Space, Col, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { getUsers, deleteUser } from '../../services/userServices';
+import { toast } from 'react-toastify';
 
 class Home extends Component {
   state = {
@@ -15,17 +16,22 @@ class Home extends Component {
     search: '',
   };
   async componentDidMount() {
-    const { data } = await getUsers();
-    let users = [];
-    let user = [];
-    for (let item of data) {
-      user.key = item._id;
-      user.name = item.name;
-      user.number = item.number;
-      users.push(user);
-      user = [];
+    try {
+      const { data } = await getUsers();
+      let users = [];
+      let user = [];
+      for (let item of data) {
+        user.key = item._id;
+        user.name = item.name;
+        user.number = item.number;
+        users.push(user);
+        user = [];
+      }
+      this.setState({ users });
+    } catch (ex) {
+      console.log(ex);
+      toast.error('An unexpected error occurrred.');
     }
-    this.setState({ users });
   }
 
   handleChange = (pagination, filters, sorter) => {
@@ -106,7 +112,7 @@ class Home extends Component {
     return (
       <Card>
         <Row justify="center">
-          <Col span={10}>
+          <Col xs={24} sm={18} md={14} lg={10}>
             <Button
               onClick={this.handleClick}
               type="primary"
