@@ -1,9 +1,8 @@
-
 @banner2: banner2;
 .@{banner2} {
   // 如果在第一屏且导航位置为 relative, 一屏为 height: calc(100vh - 64px);
   width: 100%;
-  height: ~"calc(100vh - 64px)";
+  height: 100vh;
   position: relative;
   border-color: #666;
   background: #fff;
@@ -31,10 +30,10 @@
     background-size: cover;
   }
   .bg0 {
-    background: url("https://zos.alipayobjects.com/rmsportal/bXNBIyzSLHaycUGDzwLG.jpg") center;
+    background: url('https://zos.alipayobjects.com/rmsportal/bXNBIyzSLHaycUGDzwLG.jpg') center;
     background-size: cover;
     height: 100%;
-    width: ~"calc(100% + 100px)";
+    width: ~'calc(100% + 100px)';
     left: -50px;
     &:before {
       width: 100%;
@@ -78,21 +77,21 @@
       border: 1px solid #fff;
       color: #fff;
       background: transparent;
-      transition: background .45s @ease-in, border .45s @ease-in;
+      transition: background 0.45s @ease-in, border 0.45s @ease-in;
       line-height: 36px;
       font-size: 16px;
       height: 36px;
       & span {
         text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-        transition: text-shadow .45s @ease-out;
+        transition: text-shadow 0.45s @ease-out;
       }
       &:hover {
         color: #fff;
         border-color: @primary-color;
         background: @primary-color;
-        transition: background .45s @ease-out, border .45s @ease-out;
+        transition: background 0.45s @ease-out, border 0.45s @ease-out;
         & span {
-          text-shadow: 1px 1px 3px rgba(0, 0, 0, .35);
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
         }
       }
     }
@@ -112,7 +111,7 @@
   width: 10px;
   height: 10px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, .5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 @media screen and (max-width: 414px) {
